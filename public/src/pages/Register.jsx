@@ -6,19 +6,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { registerRoute } from "../utils/APIRoutes";
+import { REACT_APP_LOCALHOST_KEY, toastOptions } from "../utils/config";
 
 /**
  * 注册页面组件
  */
 function Register() {
   const navigate = useNavigate();
-  const toastOptions = {
-    position: "bottom-right",
-    autoClose: 8000,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "dark",
-  };
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -26,7 +20,7 @@ function Register() {
     confirmPassword: "",
   });
   useEffect(() => {
-    if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
+    if (localStorage.getItem(REACT_APP_LOCALHOST_KEY)) {
       navigate("/");
     }
   }, []);
@@ -63,10 +57,7 @@ function Register() {
         toast.error(data.msg, toastOptions);
       }
       if (data.status === true) {
-        localStorage.setItem(
-          process.env.REACT_APP_LOCALHOST_KEY,
-          JSON.stringify(data.user)
-        );
+        localStorage.setItem(REACT_APP_LOCALHOST_KEY, JSON.stringify(data.user));
         navigate("/");
       }
     }

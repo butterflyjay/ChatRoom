@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { allUsersRoute } from "../utils/APIRoutes";
 import Contacts from "../components/Contacts";
+import { REACT_APP_LOCALHOST_KEY } from "../utils/config";
+
 function Chat() {
   const navigate = useNavigate();
   const socket = useRef();
@@ -11,11 +13,11 @@ function Chat() {
   const [currentUser, setCurrentUser] = useState(void 0);
   //判断本地缓存中是否有用户标识，如果没有就导航到登录页面
   // useEffect(async () => {
-  //   if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
+  //   if (localStorage.getItem(REACT_APP_LOCALHOST_KEY)) {
   //     navigate("/login");
   //   } else {
   //     setCurrentUser(
-  //       await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
+  //       await JSON.parse(localStorage.getItem(REACT_APP_LOCALHOST_KEY))
   //     );
   //   }
   // }, []);

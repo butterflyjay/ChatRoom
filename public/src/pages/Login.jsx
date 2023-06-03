@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { loginRoute } from "../utils/APIRoutes";
+import { REACT_APP_LOCALHOST_KEY, toastOptions } from "../utils/config";
 
 function Login() {
   const navigate = useNavigate();
@@ -13,15 +14,8 @@ function Login() {
     username: "",
     password: "",
   });
-  const toastOptions = {
-    position: "bottom-right",
-    autoClose: 8000,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "dark",
-  };
   useEffect(() => {
-    if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
+    if (localStorage.getItem(REACT_APP_LOCALHOST_KEY)) {
       navigate("/");
     }
   }, []);
@@ -51,10 +45,7 @@ function Login() {
         toast.error(data.msg, toastOptions);
       }
       if (data.status === true) {
-        localStorage.setItem(
-          process.env.REACT_APP_LOCALHOST_KEY,
-          JSON.stringify(data.user)
-        );
+        localStorage.setItem(REACT_APP_LOCALHOST_KEY, JSON.stringify(data.user));
         navigate("/");
       }
     }

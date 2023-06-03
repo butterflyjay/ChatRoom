@@ -102,6 +102,7 @@ function Register() {
             onChange={e => {
               handleChange(e);
             }}
+            required="email"
           />
           <input
             type="password"

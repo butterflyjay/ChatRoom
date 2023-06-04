@@ -15,6 +15,7 @@ function Login() {
     password: "",
   });
   useEffect(() => {
+    console.log(123)
     if (localStorage.getItem(REACT_APP_LOCALHOST_KEY)) {
       navigate("/");
     }

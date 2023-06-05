@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Logo from "../assets/logo.svg";
-
+import { REACT_APP_LOCALHOST_KEY } from "../utils/config";
+/**
+ * 联系人组件
+ */
 function Contacts({ contacts, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(void 0);
   const [currentUserImage, setCurrentUserImage] = useState(void 0);
   const [currentSelected, setCurrentSelected] = useState(void 0);
-  // useEffect(async () => {
-  //   const data = await JSON.parse(
-  //     localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-  //   );
-  //   setCurrentUserName(data.username);
-  //   setCurrentUserImage(data.avatarImage);
-  // }, []);
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem(REACT_APP_LOCALHOST_KEY));
+    setCurrentUserName(data.username);
+    setCurrentUserImage(data.avatarImage);
+  }, []);
   const changeCurrentChat = (index, contact) => {
     setCurrentSelected(index);
     changeChat(contact);
@@ -33,10 +34,26 @@ function Contacts({ contacts, changeChat }) {
                   className={`contact ${index === currentSelected ? "selected" : ""}`}
                   onClick={() => changeCurrentChat(index, contact)}
                 >
-                  <div className="avatar"></div>
+                  <div className="avatar">
+                    <img
+                      src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                      alt="avatar"
+                    />
+                  </div>
+                  <div className="username">
+                    <h3>{contact.username}</h3>
+                  </div>
                 </div>
               );
             })}
+          </div>
+          <div className="current-user">
+            <div className="avatar">
+              <img src={`data:image/svg+xml;base64,${currentUserImage}`} alt="avatar" />
+            </div>
+            <div className="username">
+              <h2>{currentUserName}</h2>
+            </div>
           </div>
         </Container>
       )}

@@ -39,7 +39,6 @@ export default function SetAvatar() {
       const data = [];
       for (let i = 0; i < 4; i++) {
         const image = await axios.get(`${api}/${Math.round(Math.random() * 1000)}`);
-        console.log(image);
         const buffer = new Buffer(image.data);
         data.push(buffer.toString("base64"));
       }
